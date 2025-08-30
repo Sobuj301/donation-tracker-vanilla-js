@@ -34,8 +34,10 @@ for (const btn of donateBtn) {
     btn.addEventListener('click', function (event) {
         let donateAmount = event.target.parentNode.children[3].value;
         const title = event.target.parentNode.children[1].innerText;
+        const targetBalance = getElementById('target-balance').innerText;
+        const converTargetBalance = parseInt(targetBalance);
 
-        if (isNaN(donateAmount) || donateAmount === "") {
+        if (isNaN(donateAmount) || donateAmount === "" || donateAmount > converTargetBalance) {
             return alert('Please Enter Valid Number')
         }
         else {
@@ -48,6 +50,9 @@ for (const btn of donateBtn) {
             input.value = '';
             alert(`${converDonateAmount} tk donate successfully total balance  ${subTotal} tk`)
 
+            const remainingBalance = converTargetBalance - converDonateAmount;
+            console.log(remainingBalance)
+            document.getElementById('target-balance').innerText = remainingBalance;
 
 
             // history sectioin
